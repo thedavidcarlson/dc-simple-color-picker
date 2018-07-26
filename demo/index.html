@@ -8,5 +8,11 @@
     <body>
         <input value="#ff0000" class="sc-picker" />
         <script src="../src/dc_sc_pick.js"></script>
+        <script>
+            initScPicker();
+            var myScPicker = window.scPicker;
+
+            console.log( myScPicker.hexToRgb( myScPicker.color ) );
+        </script>
     </body>
 </html>
