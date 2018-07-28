@@ -1,10 +1,43 @@
 class SimpleColorPicker {
-    constructor( el, id ) {
-        this.el = el;
-        this.color = ( el.tagName === 'INPUT' && el.type === 'text' ) ? el.value: '#ffffff';
-        this.id = id;
+    constructor( el ) {
+        if( !window.scPickers ) {
+            window.scPickers = [];
+        }
 
-        el.addEventListener( 'change', this.changeListener );
+        if( el.hasAttribute( 'data-sc-picker-id' ) ) {
+            this.id = el.getAttribute( 'data-sc-picker-id' );
+            window.scPickers.splice( this.id, 1, this );
+        } else {
+            this.id = window.scPickers.length;
+            el.setAttribute( 'data-sc-picker-id', this.id );
+            window.scPickers.push( this );
+        }
+
+        this.el = el;
+
+        var color = el.getAttribute( 'data-sc-picker-color' );
+        this.color = ( color ) ? color : '#ffffff';
+
+        
+        this.initEl();
+    }
+    initEl() {
+
+        if( !this.el.classList.contains( 'sc-picker' ) ) {
+            this.el.classList.add( 'sc-picker' );
+        }
+
+        this.el.innerHTML = '';
+
+        var scInput = document.createElement( 'input' );
+
+        scInput.setAttribute( 'type', 'text' );
+
+        scInput.setAttribute( 'value', this.color );
+
+        this.el.appendChild( scInput );
+
+        scInput.addEventListener( 'change', this.changeListener );
     }
     hexToRgb( hex ) {
         // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
@@ -24,8 +57,10 @@ class SimpleColorPicker {
     setColor( color ) {
         this.color = color;
 
-        if( this.el.tagName === 'INPUT' && this.el.type === 'text' ) {
-            this.el.value = color;
+        var input = this.el.querySelector( 'input' );
+
+        if( input ) {
+            input.value = color;
         }
     }
     changeListener( ev ) {
@@ -39,26 +74,16 @@ class SimpleColorPicker {
     }
 }
 
-const initScPicker = function() {
-    let scInput = document.querySelector( '.sc-picker' );
-
-    window.scPicker = new SimpleColorPicker( scInput, 0 );
-
-    scInput.setAttribute( 'data-sc-picker-id', 0 );
+const initScPicker = function( scInput ) {
+    return new SimpleColorPicker( scInput );
 }
 
 const initScPickers = function() {
-    window.scPickers = [];
+    let scInputs = document.querySelectorAll( '.sc-picker:not([data-sc-picker-id])' );
 
-    let scInputs = document.querySelectorAll( '.sc-picker' );
-
-    for( let i = 0, l = scInputs.length, scInput; i < l; i++ ) {
-
-        scInput = scInputs[ i ];
-
-        scInput.setAttribute( 'data-sc-picker-id', i );
-
-        window.scPickers.push( new SimpleColorPicker( scInput, i ) );
-
+    for( let i = 0, l = scInputs.length; i < l; i++ ) {
+       new SimpleColorPicker( scInputs[ i ] );
     }
+
+    return window.scPickers;
 }

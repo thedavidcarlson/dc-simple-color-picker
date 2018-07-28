@@ -6,15 +6,15 @@
         <link rel="stylesheet" type="text/css" href="styles.css" />
     </head>
     <body>
-        <input value="#ff0000" class="sc-picker" />
+        <div class="sc-picker" data-sc-picker-color="#ff0000"></div>
+        <div></div>
         <script src="../src/dc_sc_pick.js"></script>
         <script>
-            initScPicker();
-            var myScPicker = window.scPicker;
+            var myScPicker = initScPicker( document.querySelector( '.sc-picker' ) );
 
             console.log( myScPicker.hexToRgb( myScPicker.color ) );
 
-            myScPicker.setColor( '#ffffff' );
+            myScPicker.setColor( '#00ff00' );
         </script>
     </body>
 </html>
