@@ -3,6 +3,8 @@ class SimpleColorPicker {
         this.el = el;
         this.color = ( el.tagName === 'INPUT' && el.type === 'text' ) ? el.value: '#ffffff';
         this.id = id;
+
+        el.addEventListener( 'change', this.changeListener );
     }
     hexToRgb( hex ) {
         // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
@@ -24,6 +26,15 @@ class SimpleColorPicker {
 
         if( this.el.tagName === 'INPUT' && this.el.type === 'text' ) {
             this.el.value = color;
+        }
+    }
+    changeListener( ev ) {
+        var newVal = ev.target.value;
+
+        //@TODO: Add actual validation
+        if( newVal && ( newVal.length === 4 || newVal.length === 7 )  ) {
+            this.color = newVal;
+            console.log( this.color );
         }
     }
 }
