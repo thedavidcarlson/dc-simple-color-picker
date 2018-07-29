@@ -1,0 +1,16 @@
+.sc-picker {
+    position: relative;
+    display: inline-block;
+}
+
+.sc-picker .sc-picker__color-square {
+    position: absolute;
+    box-sizing: border-box;
+    top: 50%;
+    right: 5px;
+    border: 1px solid #000;
+    width: 15px;
+    height: 15px;
+    margin-top: -7.5px;
+    border-radius: 2px;
+}

@@ -29,15 +29,22 @@ class SimpleColorPicker {
 
         this.el.innerHTML = '';
 
-        var scInput = document.createElement( 'input' );
+        this.scpInput = document.createElement( 'input' );
 
-        scInput.setAttribute( 'type', 'text' );
+        this.scpInput.setAttribute( 'type', 'text' );
+        this.scpInput.setAttribute( 'value', this.color );
 
-        scInput.setAttribute( 'value', this.color );
+        this.el.appendChild( this.scpInput );
 
-        this.el.appendChild( scInput );
+        this.scpColorSquare = document.createElement( 'div' );
 
-        scInput.addEventListener( 'change', this.changeListener );
+        this.scpColorSquare.classList.add( 'sc-picker__color-square' );
+
+        this.scpColorSquare.style.backgroundColor = this.color;
+
+        this.el.appendChild( this.scpColorSquare );
+
+        this.scpInput.addEventListener( 'change', this.changeListener.bind( this ) );
     }
     hexToRgb( hex ) {
         // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
@@ -62,6 +69,8 @@ class SimpleColorPicker {
         if( input ) {
             input.value = color;
         }
+
+        this.scpColorSquare.style.backgroundColor = this.color;
     }
     changeListener( ev ) {
         var newVal = ev.target.value;
@@ -69,7 +78,7 @@ class SimpleColorPicker {
         //@TODO: Add actual validation
         if( newVal && ( newVal.length === 4 || newVal.length === 7 )  ) {
             this.color = newVal;
-            console.log( this.color );
+            this.scpColorSquare.style.backgroundColor = this.color;
         }
     }
 }
