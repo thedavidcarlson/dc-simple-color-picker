@@ -44,7 +44,8 @@ class SimpleColorPicker {
 
         this.el.appendChild( this.scpColorSquare );
 
-        this.scpInput.addEventListener( 'change', this.changeListener.bind( this ) );
+        this.scpInput.addEventListener( 'change', this.changeHandler.bind( this ) );
+        this.scpColorSquare.addEventListener( 'click', this.squareClickHandler.bind( this ) );
     }
     hexToRgb( hex ) {
         // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
@@ -72,7 +73,7 @@ class SimpleColorPicker {
 
         this.scpColorSquare.style.backgroundColor = this.color;
     }
-    changeListener( ev ) {
+    changeHandler( ev ) {
         var newVal = ev.target.value;
 
         //@TODO: Add actual validation
@@ -80,6 +81,9 @@ class SimpleColorPicker {
             this.color = newVal;
             this.scpColorSquare.style.backgroundColor = this.color;
         }
+    }
+    squareClickHandler( ev ) {
+        console.log( 'square clicked. Current color: ' + this.color );
     }
 }
 
