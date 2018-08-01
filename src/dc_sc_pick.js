@@ -44,6 +44,12 @@ class SimpleColorPicker {
 
         this.el.appendChild( this.scpColorSquare );
 
+        this.scpColorMenu = document.createElement( 'div' );
+
+        this.scpColorMenu.classList.add( 'sc-picker__color-menu' );
+
+        document.body.appendChild( this.scpColorMenu );
+
         this.scpInput.addEventListener( 'change', this.changeHandler.bind( this ) );
         this.scpColorSquare.addEventListener( 'click', this.squareClickHandler.bind( this ) );
     }
@@ -64,13 +70,7 @@ class SimpleColorPicker {
     }
     setColor( color ) {
         this.color = color;
-
-        var input = this.el.querySelector( 'input' );
-
-        if( input ) {
-            input.value = color;
-        }
-
+        this.scpInput.value = color;
         this.scpColorSquare.style.backgroundColor = this.color;
     }
     changeHandler( ev ) {
@@ -83,7 +83,21 @@ class SimpleColorPicker {
         }
     }
     squareClickHandler( ev ) {
-        console.log( 'square clicked. Current color: ' + this.color );
+        if( this.scpColorMenu.classList.contains( 'sc-picker__color-menu--open' ) ) {
+            this.scpColorMenu.classList.remove( 'sc-picker__color-menu--open' )
+        } else {
+            this.positionMenu();
+            this.scpColorMenu.classList.add( 'sc-picker__color-menu--open' );
+        }
+        
+    }
+    positionMenu() {
+        var inputPos = this.scpInput.getBoundingClientRect();
+
+        // Input left position + input width - left shift of menu ( width of square + 2 * square right pos )
+        this.scpColorMenu.style.left = ( inputPos.left + inputPos.width - 25 ) + 'px';
+        this.scpColorMenu.style.top = inputPos.top + 'px';
+
     }
 }
 

@@ -3,6 +3,10 @@
     display: inline-block;
 }
 
+.sc-picker input {
+    width: 200px;
+}
+
 .sc-picker .sc-picker__color-square {
     position: absolute;
     box-sizing: border-box;
@@ -13,4 +17,20 @@
     height: 15px;
     margin-top: -7.5px;
     border-radius: 2px;
+    z-index: 2;
+}
+
+.sc-picker__color-menu {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    width: 200px;
+    height: 400px;
+    background-color: #fff;
+    border: 1px solid #000;
+    margin-left: -1px;
+}
+
+.sc-picker__color-menu.sc-picker__color-menu--open {
+    display: block;
 }
