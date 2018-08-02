@@ -12,11 +12,7 @@
     box-sizing: border-box;
     top: 50%;
     right: 5px;
-    border: 1px solid #000;
-    width: 15px;
-    height: 15px;
     margin-top: -7.5px;
-    border-radius: 2px;
     z-index: 2;
 }
 
@@ -33,4 +29,24 @@
 
 .sc-picker__color-menu.sc-picker__color-menu--open {
     display: block;
+}
+
+.sc-picker__color-menu-items {
+    display: flex;
+    margin-top: 25px;
+    justify-content: flex-start;
+    padding: 0 5px;
+}
+
+.sc-picker .sc-picker__color-square,
+.sc-picker__color-menu-item {
+    border: 1px solid #000;
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+}
+
+
+.sc-picker__color-menu-item {
+    margin-right: 5px;
 }

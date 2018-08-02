@@ -15,7 +15,7 @@ class SimpleColorPicker {
 
         this.el = el;
 
-        var color = el.getAttribute( 'data-sc-picker-color' );
+        let color = el.getAttribute( 'data-sc-picker-color' );
         this.color = ( color ) ? color : '#ffffff';
 
         
@@ -44,24 +44,20 @@ class SimpleColorPicker {
 
         this.el.appendChild( this.scpColorSquare );
 
-        this.scpColorMenu = document.createElement( 'div' );
-
-        this.scpColorMenu.classList.add( 'sc-picker__color-menu' );
-
-        document.body.appendChild( this.scpColorMenu );
+        this.createMenu();
 
         this.scpInput.addEventListener( 'change', this.changeHandler.bind( this ) );
         this.scpColorSquare.addEventListener( 'click', this.squareClickHandler.bind( this ) );
     }
     hexToRgb( hex ) {
         // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+        let shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
 
         hex = hex.replace( shorthandRegex, function(m, r, g, b) {
             return r + r + g + g + b + b;
         } );
 
-        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec( hex );
+        let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec( hex );
         return result ? {
             r: parseInt( result[ 1 ], 16 ),
             g: parseInt( result[ 2 ], 16 ),
@@ -74,7 +70,7 @@ class SimpleColorPicker {
         this.scpColorSquare.style.backgroundColor = this.color;
     }
     changeHandler( ev ) {
-        var newVal = ev.target.value;
+        let newVal = ev.target.value;
 
         //@TODO: Add actual validation
         if( newVal && ( newVal.length === 4 || newVal.length === 7 )  ) {
@@ -84,15 +80,42 @@ class SimpleColorPicker {
     }
     squareClickHandler( ev ) {
         if( this.scpColorMenu.classList.contains( 'sc-picker__color-menu--open' ) ) {
-            this.scpColorMenu.classList.remove( 'sc-picker__color-menu--open' )
+            this.scpColorMenu.classList.remove( 'sc-picker__color-menu--open' );
         } else {
             this.positionMenu();
             this.scpColorMenu.classList.add( 'sc-picker__color-menu--open' );
         }
-        
+    }
+    menuItemClick( ev ) {
+        var clickTarget = ev.target;
+
+        if( clickTarget.classList.contains( 'sc-picker__color-menu-item' ) ) {
+            var color = clickTarget.getAttribute( 'data-color' );
+            this.setColor( color );
+            this.scpColorMenu.classList.remove( 'sc-picker__color-menu--open' );
+        }
+    }
+    createMenu() {
+        let menuContent = `
+            <div class="sc-picker__color-menu-items">
+                <div class="sc-picker__color-menu-item" data-color="#ff0000" style="background-color:#ff0000"></div>
+                <div class="sc-picker__color-menu-item" data-color="#00ff00" style="background-color:#00ff00"></div>
+                <div class="sc-picker__color-menu-item" data-color="#0000ff" style="background-color:#0000ff"></div>
+            </div>
+        `;
+
+        this.scpColorMenu = document.createElement( 'div' );
+
+        this.scpColorMenu.classList.add( 'sc-picker__color-menu' );
+
+        this.scpColorMenu.innerHTML = menuContent;
+
+        document.body.appendChild( this.scpColorMenu );
+
+        this.scpColorMenu.querySelector( '.sc-picker__color-menu-items' ).addEventListener( 'click', this.menuItemClick.bind( this ) );
     }
     positionMenu() {
-        var inputPos = this.scpInput.getBoundingClientRect();
+        let inputPos = this.scpInput.getBoundingClientRect();
 
         // Input left position + input width - left shift of menu ( width of square + 2 * square right pos )
         this.scpColorMenu.style.left = ( inputPos.left + inputPos.width - 25 ) + 'px';
