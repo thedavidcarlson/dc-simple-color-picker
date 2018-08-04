@@ -11,11 +11,22 @@
         <div></div>
         <script src="../src/dc_sc_pick.js"></script>
         <script>
-            var myScPicker = initScPicker( document.querySelector( '.sc-picker' ) );
+            var myScPicker = initScPicker( document.querySelector( '.sc-picker' ) ),
+                rgb = myScPicker.hexToRgb( myScPicker.color ),
+                hsl = myScPicker.rgbToHsl( rgb.r, rgb.g, rgb.b );
 
-            console.log( myScPicker.hexToRgb( myScPicker.color ) );
+
+            console.log( 'RGB Values: R:' + rgb.r + ', G:' + rgb.g + ', B:' + rgb.b );
+            console.log( 'HSL Values: H:' + hsl.h + ', S:' + hsl.s + ', L:' + hsl.l );
 
             myScPicker.setColor( '#00ff00' );
+
+            rgb = myScPicker.hexToRgb( myScPicker.color );
+            hsl = myScPicker.rgbToHsl( rgb.r, rgb.g, rgb.b );
+
+
+            console.log( 'RGB Values: R:' + rgb.r + ', G:' + rgb.g + ', B:' + rgb.b );
+            console.log( 'HSL Values: H:' + hsl.h + ', S:' + hsl.s + ', L:' + hsl.l );
         </script>
     </body>
 </html>

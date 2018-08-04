@@ -49,21 +49,6 @@ class SimpleColorPicker {
         this.scpInput.addEventListener( 'change', this.changeHandler.bind( this ) );
         this.scpColorSquare.addEventListener( 'click', this.squareClickHandler.bind( this ) );
     }
-    hexToRgb( hex ) {
-        // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
-        let shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-
-        hex = hex.replace( shorthandRegex, function(m, r, g, b) {
-            return r + r + g + g + b + b;
-        } );
-
-        let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec( hex );
-        return result ? {
-            r: parseInt( result[ 1 ], 16 ),
-            g: parseInt( result[ 2 ], 16 ),
-            b: parseInt( result[ 3 ], 16 )
-        } : null;
-    }
     setColor( color ) {
         this.color = color;
         this.scpInput.value = color;
@@ -111,7 +96,7 @@ class SimpleColorPicker {
 
         this.scpColorMenu.classList.add( 'sc-picker__color-menu' );
 
-        this.scpColorMenu.innerHTML = menuContent;
+        this.scpColorMenu.innerHTML  =menuContent;
 
         document.body.appendChild( this.scpColorMenu );
 
@@ -124,6 +109,99 @@ class SimpleColorPicker {
         this.scpColorMenu.style.left = ( inputPos.left + inputPos.width - 25 ) + 'px';
         this.scpColorMenu.style.top = inputPos.top + 'px';
 
+    }
+    hexToRgb( hex ) {
+        // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+        let shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+
+        hex = hex.replace( shorthandRegex, function(m, r, g, b) {
+            return r + r + g + g + b + b;
+        } );
+
+        let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec( hex );
+        return result ? {
+            r: parseInt( result[ 1 ], 16 ),
+            g: parseInt( result[ 2 ], 16 ),
+            b: parseInt( result[ 3 ], 16 )
+        } : null;
+    }
+    rgbToHsl( r, g, b ) {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+
+        let max = Math.max( r, g, b ), 
+            min = Math.min( r, g, b ),
+            l = ( max + min ) / 2,
+            h, s;
+
+        // Achromatic
+        if ( max === min ) {
+            h = s = 0; 
+        } else {
+            let d = max - min;
+
+            s = ( l > 0.5 ) ? ( d / ( 2 - max - min ) ) : ( d / ( max + min ) );
+
+            switch ( max ) {
+                case r:
+                    h = ( g - b ) / d + ( g < b ? 6 : 0 );
+                    break;
+                case g:
+                    h = (b - r) / d + 2;
+                    break;
+                case b:
+                    h = (r - g) / d + 4;
+                    break;
+            }
+
+            h /= 6;
+        }
+
+        return {
+            h: h,
+            s: s,
+            l: l
+        };
+    }
+    hslToRgb( h, s, l ) {
+        var r, g, b;
+
+        // Achromatic
+        if ( s == 0 ) {
+            r = g = b = l; 
+        } else {
+
+            var q = ( l < 0.5 ) ? ( l * ( 1 + s ) ) : ( l + s - l * s ),
+                p = 2 * l - q;
+
+            r = this.hueToRgb( p, q, h + 1/3 );
+            g = this.hueToRgb( p, q, h );
+            b = this.hueToRgb( p, q, h - 1/3 );
+        }
+
+        return {
+            r: r * 255,
+            g: g * 255,
+            b: b * 255
+        };
+    }
+    hueToRgb( p, q, t ) {
+        if ( t < 0 ) {
+            t += 1;
+        } else if ( t > 1 ) {
+            t -= 1;
+        }
+
+        if ( t < 1/6 ) {
+            return p + ( q - p ) * 6 * t;
+        } else if ( t < 1 / 2 ) {
+            return q;
+        } else if ( t < 2 / 3 ) {
+            return p + ( q - p ) * ( 2 / 3 - t ) * 6;
+        } 
+        
+        return p;
     }
 }
 
