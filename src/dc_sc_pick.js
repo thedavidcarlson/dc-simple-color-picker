@@ -82,13 +82,16 @@ class SimpleColorPicker {
     }
     createMenu() {
         let menuContent = `
-            <div class="sc-picker__color-menu-items">
-                <div class="sc-picker__color-menu-item" data-color="#ff0000" style="background-color:#ff0000"></div>
-                <div class="sc-picker__color-menu-item" data-color="#00ff00" style="background-color:#00ff00"></div>
-                <div class="sc-picker__color-menu-item" data-color="#0000ff" style="background-color:#0000ff"></div>
-                <div class="sc-picker__color-menu-item" data-color="#ffff00" style="background-color:#ffff00"></div>
-                <div class="sc-picker__color-menu-item" data-color="#00ffff" style="background-color:#00ffff"></div>
-                <div class="sc-picker__color-menu-item" data-color="#ccc" style="background-color:#ccc"></div>
+            <div class="sc-picker__color-menu-wrapper">
+                <div class="sc-picker__hue-color-slider"></div>
+                <div class="sc-picker__color-menu-items">
+                    <div class="sc-picker__color-menu-item" data-color="#ff0000" style="background-color:#ff0000"></div>
+                    <div class="sc-picker__color-menu-item" data-color="#00ff00" style="background-color:#00ff00"></div>
+                    <div class="sc-picker__color-menu-item" data-color="#0000ff" style="background-color:#0000ff"></div>
+                    <div class="sc-picker__color-menu-item" data-color="#ffff00" style="background-color:#ffff00"></div>
+                    <div class="sc-picker__color-menu-item" data-color="#00ffff" style="background-color:#00ffff"></div>
+                    <div class="sc-picker__color-menu-item" data-color="#ccc" style="background-color:#ccc"></div>
+                </div>
             </div>
         `;
 
@@ -96,7 +99,7 @@ class SimpleColorPicker {
 
         this.scpColorMenu.classList.add( 'sc-picker__color-menu' );
 
-        this.scpColorMenu.innerHTML  =menuContent;
+        this.scpColorMenu.innerHTML = menuContent;
 
         document.body.appendChild( this.scpColorMenu );
 

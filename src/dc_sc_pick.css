@@ -31,11 +31,20 @@
     display: block;
 }
 
+.sc-picker__color-menu-wrapper {
+    margin-top: 30px;
+    padding: 0 5px;
+}
+
+.sc-picker__hue-color-slider {
+    height: 20px;
+    margin-bottom: 15px;
+    background: linear-gradient(to left, rgba(255, 0, 0, 1), rgba(255, 255, 0, 1), rgba(0, 255, 0, 1), rgba(0, 255, 255, 1), rgba(0, 0, 255, 1), rgba(255, 0, 255, 1), rgba(255, 0, 0, 1));
+}
+
 .sc-picker__color-menu-items {
     display: flex;
-    margin-top: 25px;
     justify-content: flex-start;
-    padding: 0 5px;
 }
 
 .sc-picker .sc-picker__color-square,
