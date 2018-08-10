@@ -82,11 +82,16 @@ class SimpleColorPicker {
     }
     colorSliderClick( ev ) {
         let position = ev.offsetX,
-            width = ev.target.getBoundingClientRect().width;
+            width = ev.target.getBoundingClientRect().width,
+            fractionClicked = position / width,
+            percentClicked = fractionClicked * 100,
+            rgbColor = this.hslToRgb( fractionClicked, 1, .5 );
 
-        console.log( 'Clicked at: ' + ( ( position / width ) * 100 ) + '%' );
+        console.log( 'Clicked at: ' + percentClicked + '%' );
 
-        return ( position / width ) * 100;
+        console.log( 'Corresponding RGB:' + rgbColor.r + ', ' + rgbColor.g + ', ' + rgbColor.b );
+
+        return percentClicked;
     }
     createMenu() {
         let menuContent = `
