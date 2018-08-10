@@ -80,6 +80,14 @@ class SimpleColorPicker {
             this.scpColorMenu.classList.remove( 'sc-picker__color-menu--open' );
         }
     }
+    colorSliderClick( ev ) {
+        let position = ev.offsetX,
+            width = ev.target.getBoundingClientRect().width;
+
+        console.log( 'Clicked at: ' + ( ( position / width ) * 100 ) + '%' );
+
+        return ( position / width ) * 100;
+    }
     createMenu() {
         let menuContent = `
             <div class="sc-picker__color-menu-wrapper">
@@ -102,6 +110,8 @@ class SimpleColorPicker {
         this.scpColorMenu.innerHTML = menuContent;
 
         document.body.appendChild( this.scpColorMenu );
+
+        this.scpColorMenu.querySelector( '.sc-picker__hue-color-slider' ).addEventListener( 'click', this.colorSliderClick.bind( this ) );
 
         this.scpColorMenu.querySelector( '.sc-picker__color-menu-items' ).addEventListener( 'click', this.menuItemClick.bind( this ) );
     }
