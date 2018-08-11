@@ -85,13 +85,12 @@ class SimpleColorPicker {
             width = ev.target.getBoundingClientRect().width,
             fractionClicked = position / width,
             percentClicked = fractionClicked * 100,
-            rgbColor = this.hslToRgb( fractionClicked, 1, .5 );
+            rgbColor = this.hslToRgb( fractionClicked, 1, .5 ),
+            hexString = this.rgbToHex( rgbColor );
 
         console.log( 'Clicked at: ' + percentClicked + '%' );
 
-        console.log( 'Corresponding RGB:' + rgbColor.r + ', ' + rgbColor.g + ', ' + rgbColor.b );
-
-        return percentClicked;
+        this.setColor( hexString );
     }
     createMenu() {
         let menuContent = `
@@ -142,6 +141,13 @@ class SimpleColorPicker {
             g: parseInt( result[ 2 ], 16 ),
             b: parseInt( result[ 3 ], 16 )
         } : null;
+    }
+    rgbToHex( rgbObj ) {
+        var hexValues = [ rgbObj.r.toString(16), rgbObj.g.toString(16), rgbObj.b.toString(16) ];
+        hexValues = hexValues.map( function( hex ) {
+            return ( hex.length === 1 ) ? ( '0' + hex ) : hex;
+        } );
+        return '#' + hexValues[ 0 ] + hexValues[ 1 ] + hexValues[ 2 ];
     }
     rgbToHsl( r, g, b ) {
         r /= 255;
@@ -199,9 +205,9 @@ class SimpleColorPicker {
         }
 
         return {
-            r: r * 255,
-            g: g * 255,
-            b: b * 255
+            r: Math.round( r * 255 ),
+            g: Math.round( g * 255 ),
+            b: Math.round( b * 255 )
         };
     }
     hueToRgb( p, q, t ) {
