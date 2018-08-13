@@ -36,10 +36,16 @@
     padding: 0 5px;
 }
 
-.sc-picker__hue-color-slider {
+.sc-picker__hue-selector {
     height: 20px;
     margin-bottom: 15px;
-    background: linear-gradient(to left, rgba(255, 0, 0, 1), rgba(255, 255, 0, 1), rgba(0, 255, 0, 1), rgba(0, 255, 255, 1), rgba(0, 0, 255, 1), rgba(255, 0, 255, 1), rgba(255, 0, 0, 1));
+    background: linear-gradient(to right, rgba(255, 0, 0, 1), rgba(255, 255, 0, 1), rgba(0, 255, 0, 1), rgba(0, 255, 255, 1), rgba(0, 0, 255, 1), rgba(255, 0, 255, 1), rgba(255, 0, 0, 1));
+}
+
+.sc-picker__saturation-lightness-selector {
+    height: 150px;
+    background: linear-gradient(to bottom right, hsl(0,0%,0%), hsl(0,50%,50%), hsl(0,100%,100%));
+    margin-bottom: 15px;
 }
 
 .sc-picker__color-menu-items {

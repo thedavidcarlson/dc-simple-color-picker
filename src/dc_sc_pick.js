@@ -95,7 +95,8 @@ class SimpleColorPicker {
     createMenu() {
         let menuContent = `
             <div class="sc-picker__color-menu-wrapper">
-                <div class="sc-picker__hue-color-slider"></div>
+                <div class="sc-picker__hue-selector"></div>
+                <div class="sc-picker__saturation-lightness-selector"></div>
                 <div class="sc-picker__color-menu-items">
                     <div class="sc-picker__color-menu-item" data-color="#ff0000" style="background-color:#ff0000"></div>
                     <div class="sc-picker__color-menu-item" data-color="#00ff00" style="background-color:#00ff00"></div>
@@ -115,7 +116,7 @@ class SimpleColorPicker {
 
         document.body.appendChild( this.scpColorMenu );
 
-        this.scpColorMenu.querySelector( '.sc-picker__hue-color-slider' ).addEventListener( 'click', this.colorSliderClick.bind( this ) );
+        this.scpColorMenu.querySelector( '.sc-picker__hue-selector' ).addEventListener( 'click', this.colorSliderClick.bind( this ) );
 
         this.scpColorMenu.querySelector( '.sc-picker__color-menu-items' ).addEventListener( 'click', this.menuItemClick.bind( this ) );
     }
