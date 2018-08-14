@@ -92,6 +92,18 @@ class SimpleColorPicker {
 
         this.setColor( hexString );
     }
+    colorPadClick( ev ) {
+        let xPos = ev.offsetX,
+            yPos = ev.offsetY,
+            boundingRect = ev.target.getBoundingClientRect(),
+            width = boundingRect.width,
+            height = boundingRect.height,
+            xFraction = xPos / width,
+            yFraction = yPos / height;
+
+        console.log( 'clicked x:' + xFraction + ' clicked y:' + yFraction );
+
+    }
     createMenu() {
         let menuContent = `
             <div class="sc-picker__color-menu-wrapper">
@@ -117,7 +129,7 @@ class SimpleColorPicker {
         document.body.appendChild( this.scpColorMenu );
 
         this.scpColorMenu.querySelector( '.sc-picker__hue-selector' ).addEventListener( 'click', this.colorSliderClick.bind( this ) );
-
+        this.scpColorMenu.querySelector( '.sc-picker__saturation-lightness-selector' ).addEventListener( 'click', this.colorPadClick.bind( this ) );
         this.scpColorMenu.querySelector( '.sc-picker__color-menu-items' ).addEventListener( 'click', this.menuItemClick.bind( this ) );
     }
     positionMenu() {
