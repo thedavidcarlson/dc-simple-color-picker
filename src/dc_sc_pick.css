@@ -43,7 +43,7 @@
 }
 
 .sc-picker__saturation-lightness-selector {
-    height: 150px;
+    height: 190px;
     background: linear-gradient(to bottom right, hsl(0,0%,0%), hsl(0,50%,50%), hsl(0,100%,100%));
     margin-bottom: 15px;
 }
