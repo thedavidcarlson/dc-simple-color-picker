@@ -42,6 +42,15 @@
     background: linear-gradient(to right, rgba(255, 0, 0, 1), rgba(255, 255, 0, 1), rgba(0, 255, 0, 1), rgba(0, 255, 255, 1), rgba(0, 0, 255, 1), rgba(255, 0, 255, 1), rgba(255, 0, 0, 1));
 }
 
+.sc-picker__hue-selector-bar {
+    height: calc( 100% + 10px );
+    width: 6px;
+    background-color: black;
+    position: relative;
+    margin-left: -3px;
+    top: -5px;
+}
+
 .sc-picker__saturation-lightness-selector {
     height: 190px;
     background: linear-gradient(to bottom right, hsl(0,0%,0%), hsl(0,50%,50%), hsl(0,100%,100%));

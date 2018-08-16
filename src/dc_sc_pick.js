@@ -88,6 +88,8 @@ class SimpleColorPicker {
             rgbColor = this.hslToRgb( fractionClicked, 1, .5 ),
             hexString = this.rgbToHex( rgbColor );
 
+        this.scpColorMenu.querySelector( '.sc-picker__hue-selector-bar' ).style.left = percentClicked + '%';
+
         console.log( 'Clicked at: ' + percentClicked + '%' );
 
         this.setColor( hexString );
@@ -107,7 +109,9 @@ class SimpleColorPicker {
     createMenu() {
         let menuContent = `
             <div class="sc-picker__color-menu-wrapper">
-                <div class="sc-picker__hue-selector"></div>
+                <div class="sc-picker__hue-selector">
+                    <div class="sc-picker__hue-selector-bar"></div>
+                </div>
                 <div class="sc-picker__saturation-lightness-selector"></div>
                 <div class="sc-picker__color-menu-items">
                     <div class="sc-picker__color-menu-item" data-color="#ff0000" style="background-color:#ff0000"></div>
