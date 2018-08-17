@@ -94,6 +94,9 @@ class SimpleColorPicker {
 
         this.setColor( hexString );
     }
+    colorSliderBarClick( ev ) {
+        ev.stopPropagation();
+    }
     colorPadClick( ev ) {
         let xPos = ev.offsetX,
             yPos = ev.offsetY,
@@ -132,6 +135,7 @@ class SimpleColorPicker {
 
         document.body.appendChild( this.scpColorMenu );
 
+        this.scpColorMenu.querySelector( '.sc-picker__hue-selector-bar' ).addEventListener( 'click', this.colorSliderBarClick.bind( this ) );
         this.scpColorMenu.querySelector( '.sc-picker__hue-selector' ).addEventListener( 'click', this.colorSliderClick.bind( this ) );
         this.scpColorMenu.querySelector( '.sc-picker__saturation-lightness-selector' ).addEventListener( 'click', this.colorPadClick.bind( this ) );
         this.scpColorMenu.querySelector( '.sc-picker__color-menu-items' ).addEventListener( 'click', this.menuItemClick.bind( this ) );
