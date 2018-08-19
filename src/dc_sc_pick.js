@@ -115,7 +115,9 @@ class SimpleColorPicker {
                 <div class="sc-picker__hue-selector">
                     <div class="sc-picker__hue-selector-bar"></div>
                 </div>
-                <div class="sc-picker__saturation-lightness-selector"></div>
+                <div class="sc-picker__saturation-lightness-selector">
+                    <div class="sc-picker__sl-dot"></div>
+                </div>
                 <div class="sc-picker__color-menu-items">
                     <div class="sc-picker__color-menu-item" data-color="#ff0000" style="background-color:#ff0000"></div>
                     <div class="sc-picker__color-menu-item" data-color="#00ff00" style="background-color:#00ff00"></div>

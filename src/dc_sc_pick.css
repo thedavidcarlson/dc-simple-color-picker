@@ -55,6 +55,19 @@
     height: 190px;
     background: linear-gradient(to bottom right, hsl(0,0%,0%), hsl(0,50%,50%), hsl(0,100%,100%));
     margin-bottom: 15px;
+    position: relative;
+}
+
+.sc-picker__sl-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    top: 0;
+    left: 0;
+    margin-top: -3px;
+    margin-left: -3px;
+    background-color: #333;
+    border-radius: 50%;
 }
 
 .sc-picker__color-menu-items {
