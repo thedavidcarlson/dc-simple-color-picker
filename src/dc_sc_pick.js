@@ -104,7 +104,11 @@ class SimpleColorPicker {
             width = boundingRect.width,
             height = boundingRect.height,
             xFraction = xPos / width,
-            yFraction = yPos / height;
+            yFraction = yPos / height,
+            slDot = this.scpColorMenu.querySelector( '.sc-picker__sl-dot' );
+
+        slDot.style.left = ( xFraction * 100 ) + '%';
+        slDot.style.top = ( yFraction * 100 ) + '%';
 
         console.log( 'clicked x:' + xFraction + ' clicked y:' + yFraction );
 
